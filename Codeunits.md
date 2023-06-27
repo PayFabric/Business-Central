@@ -72,8 +72,8 @@ This codeunit provided useful functions to Send a PayLink in PayFabric for BC fo
         Nodus EMail Address | Text | Y | EMail Address must be a single valid email address
         Nodus Additional Emails | Text | N | Additional Emails accept multiple email addresses
         Nodus PayLink Trx Type | Option | Y | Credit Card transaction type accept `Sale` and `Authorization`. ACH transaction type accept `Sale`
-        Nodus Nodus PayLink CC Gateway | Text | Y | Payment gateway account profile name for credit card payments. Either PayLink CC or eCheck Gateway needs to be selected. f both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
-        NodusPayLink eCheck Gateway | Text | Y | Payment gateway account profile name for eCheck payments. Either PayLink CC or eCheck Gateway needs to be selected. f both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
+        Nodus Nodus PayLink CC Gateway | Text | Y | Payment gateway account profile name for credit card payments. Either PayLink CC or eCheck Gateway needs to be selected. If both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
+        NodusPayLink eCheck Gateway | Text | Y | Payment gateway account profile name for eCheck payments. Either PayLink CC or eCheck Gateway needs to be selected. If both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
         Nodus Phone | Text | N | Ignore this field if `Allow PayLink SMS` is disabled
         Nodus Invoice Type | Code[40] | N | Invoice Type is used for PayFabric Receivables
 
