@@ -27,13 +27,13 @@ This codeunit provided useful functions to process PayFabric Transaction in PayF
         Bill-to Customer No. | Code[20] | Y | The bill-to customer number
         Payment Method Code | Code[10] | Y | The Payment Method Code
         nodPFTransactionType | Text | Y | PayFabric Transaction Type only accept `Sale`, `Authorization`, `Capture`, `Void`, `Refund`. For more information on PayFabric Transaction Types, click [here](https://github.com/PayFabric/APIs/blob/master/PayFabric/Sections/Transaction%20Types.md).
-        nodPFPaymentAmount | Decimal | Y | Payment Amount required for `Sale`, `Authorization`, `Capture`, and `Non-Reference Refund`
-        nodWalletID | Code[50] | Y | PayFabric Wallet ID required for `Sale`, `Authorization`, and `Non-Reference Refund`
-        Nodus PF Trx Key | Code[50] | Y | PayFabric Transaction Key required for `Capture`, `Void`, and `Reference Refund`
+        nodPFPaymentAmount | Decimal | Conditional | Payment Amount required for `Sale`, `Authorization`, `Capture`, and `Non-Reference Refund`
+        nodWalletID | Code[50] | Conditional | PayFabric Wallet ID required for `Sale`, `Authorization`, and `Non-Reference Refund`
+        Nodus PF Trx Key | Code[50] | Conditional | PayFabric Transaction Key required for `Capture`, `Void`, and `Reference Refund`
         Nodus EMail Address | Text | N | EMail Address must be a single valid email address
         Nodus Additional Emails | Text | N | Additional Emails accept multiple email addresses
         Nodus Schedule Type | Option | N | PayFabric Schedule Type only accept `Unscheduled`,`Installment`,`Recurring`
-        Nodus Entry Class | Enum | N | Entry Class is only used for EVO ACH
+        Nodus Entry Class | Enum "Nodus Entry Class" | N | Entry Class is only used for EVO ACH
         Nodus Invoice Type | Code[40] | N | Invoice Type is used for PayFabric Receivables
     
       *PayFabricTransaction(Record nodPFTransactions)*
@@ -72,8 +72,8 @@ This codeunit provided useful functions to Send a PayLink in PayFabric for BC fo
         Nodus EMail Address | Text | Y | EMail Address must be a single valid email address
         Nodus Additional Emails | Text | N | Additional Emails accept multiple email addresses
         Nodus PayLink Trx Type | Option | Y | Credit Card transaction type accept `Sale` and `Authorization`. ACH transaction type accept `Sale`
-        Nodus Nodus PayLink CC Gateway | Text | Y | Payment gateway account profile name for credit card payments. Either PayLink CC or eCheck Gateway needs to be selected. If both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
-        NodusPayLink eCheck Gateway | Text | Y | Payment gateway account profile name for eCheck payments. Either PayLink CC or eCheck Gateway needs to be selected. If both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
+        Nodus PayLink CC Gateway | Text | Conditional | Payment gateway account profile name for credit card payments. Either PayLink CC or eCheck Gateway needs to be selected. If both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
+        Nodus PayLink eCheck Gateway | Text | Conditional | Payment gateway account profile name for eCheck payments. Either PayLink CC or eCheck Gateway needs to be selected. If both CC and eCheck Gateway are blank, use default gateway based on selected Payment Method Code.
         Nodus Phone | Text | N | Ignore this field if `Allow PayLink SMS` is disabled
         Nodus Invoice Type | Code[40] | N | Invoice Type is used for PayFabric Receivables
 
@@ -124,7 +124,7 @@ This codeunit provided useful functions to integrate PayFabric Transactions and 
 This codeunit provided useful functions in PayFabric for BC for third-party partners developers.
 
   * ### PopulateDefaultPayFabricFields (Method)
-    This method populate all default PF fields such as default wallet, default email addresses and so on for existing Sales Order/Invoice and save it
+    This method populate all default PF fields such as default wallet, default email addresses, default invoice type and so on for existing Sales Order/Invoice and save it. If you want to check all of these fields, you can find it under PayFabric section of Sales Order/Invoice page.
 
     * #### Syntax
       ```
