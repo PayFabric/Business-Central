@@ -29,7 +29,7 @@ For information on how to get the OAuth 2.0 Token can be found [here](https://le
 In the request body, supply a JSON representation of a PFTransactions object. The following values are available for this API. 
 | Property | Type | Maximum size | Required | Description |
 | :------------- | :------------- |  :------------- |  :------------- |  :------------- | 
-| PayFabricTransactionKey | String | 20 | Y | The PayFabric Transaction Key from the PayFabric processed transaction. |
+| PFTransactionKey | String | 20 | Y | The PayFabric Transaction Key from the PayFabric processed transaction. |
 | DocumentType | String | 30 | Y | The type of the document to connect the PayFabric transaction with. Allowed values: `Order`,	`Invoice`,	`CashReceiptJournalPayment` |
 | DocumentID | String | 20 | Y | The identifier for the document to be connected with the PayFabric transaction. |
 | Service | String | 10 | N | The PayFabric service that the PayFabric transaction originates from. If blank, the default value is set to “PayFabric”. Allowed values: `PayFabric`, `PayLink` |
@@ -41,7 +41,7 @@ If successful, this method returns a 201 Created response code and a PFTransacti
 
 ```json
 {
-	"PayFabricTransactionKey": "20030900043767",
+	"PFTransactionKey": "20030900043767",
 	"DocumentType": "Invoice",
 	"DocumentID": "S-INV102222",
 	"Service": "PayFabric"
