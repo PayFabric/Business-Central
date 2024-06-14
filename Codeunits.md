@@ -144,3 +144,51 @@ This codeunit provided useful functions in PayFabric for BC for third-party part
         Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not take no action
         Bill-to Customer No. | Code[20] | Y | The bill-to customer number, if it is blank take no action
         Payment Method Code | Code[10] | Y | The Payment Method Code, if it is blank take no action
+
+- - -
+
+## "Nodus PF Record Payments" (Codeunit 70117045)
+This codeunit provided useful functions to record processed PayFabric Capture/Sale Transactions in Cash Receipt Journals for BC partner developers
+
+  * ### RecordPayments (Method)
+    Use this method to record processed PayFabric Capture/Sale Transactions. 
+
+    * #### Syntax
+      ```CAL
+      procedure RecordPayments(PayFabricTransactionKey: Text; SalesHeader: Record "Sales Header")
+      ```
+    * #### Parameters      
+      *PayFabricTransactionKey(Text)*
+
+      The key of PayFabric Capture/Sale transaction
+
+      *SalesHeader(Record "Sales Header")*
+
+      BC Sales Order/Invoice source table object
+
+
+    * #### Example
+
+    ```CAL
+    procedure ProcessMultipleRecordPayments(RecSalesHeader: Record "Sales Header")
+    var
+        PayFabricTransactions: Record nodPFTransactions;
+        RecordPaymentCodeUnit: Codeunit "Nodus PF Record Payments";
+    begin
+        if not RecSalesHeader.FindFirst() then
+            Error('The document was not found');
+        Clear(PayFabricTransactions);
+        PayFabricTransactions.SetRange(DocumentNo, RecSalesHeader."No.");
+        PayFabricTransactions.SetRange(DocumentType, PayFabricTransactions.DocumentType::Order);
+        // Only approved Sale or Capture transaction can be recorded on Cash Receipt Journals
+        PayFabricTransactions.SetRange(Status, PayFabricTransactions.Status::Approved);
+        PayFabricTransactions.SetFilter(TransactionType, '%1|%2', PayFabricTransactions.TransactionType::Capture, PayFabricTransactions.TransactionType::Sale);
+        PayFabricTransactions.SetRange("Cash Entry Created", false);  // 'false' means the payment has not been created on Cash Receipt Journals for this transaction
+        if PayFabricTransactions.FindSet() then
+            repeat
+                RecordPaymentCodeUnit.RecordPayments(PayFabricTransactions.TransactionKey, RecSalesHeader);
+            until PayFabricTransactions.Next() = 0;
+    end;
+    ```
+
+- - -
