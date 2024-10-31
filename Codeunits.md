@@ -4,7 +4,7 @@ Provide codeunits and APIs for third-party developers interested in utilizing Pa
 - - -
 
 ## "Nodus PF Process Transaction" (Codeunit 70117037)
-This codeunit provided useful functions to process PayFabric Transaction in PayFabric for BC for partners developers
+This codeunit provide the function to process PayFabric Transaction in Sales Order/Invoice for third-party developers
 
   * ### ProcessTransaction (Method)
     Use this method to process and save differenct types of transaction. 
@@ -46,7 +46,7 @@ This codeunit provided useful functions to process PayFabric Transaction in PayF
 - - -
 
 ## "Nodus PF Create PayLink" (Codeunit 70117038)
-This codeunit provided useful functions to Send a PayLink in PayFabric for BC for partners developers
+This codeunit provide the function to Send a PayLink in Sales Order/Invoice for third-party developers
 
   * ### SendPayLink (Method)
     Use this method to send a PayLink to an email or phone number and save it.
@@ -87,7 +87,7 @@ This codeunit provided useful functions to Send a PayLink in PayFabric for BC fo
 - - - 
 
 ## "Nodus PF Transaction Integr." (Codeunit 70117039)
-This codeunit provided useful functions to integrate PayFabric Transactions and PayLinks into BC for partners developers
+This codeunit provide the function to integrate PayFabric Transactions and PayLinks into Business Central for third-party developers
 
   * ### PayFabricTransactionIntegration (Method)
     Use this method to call BC PayFabric POST API to integrate PayFabric Transactions and PayLink into BC.
@@ -121,7 +121,7 @@ This codeunit provided useful functions to integrate PayFabric Transactions and 
 - - - 
 
 ## "Nodus PF Populate Defaults" (Codeunit 70117042)
-This codeunit provided useful functions in PayFabric for BC for third-party partners developers.
+This codeunit provide the function to populate default PayFabric fields in Business Central for third-party developers
 
   * ### PopulateDefaultPayFabricFields (Method)
     This method populate all default PF fields such as default wallet, default email addresses, default invoice type and so on for existing Sales Order/Invoice and save it. If you want to check all of these fields, you can find it under PayFabric section of Sales Order/Invoice page.
@@ -148,7 +148,7 @@ This codeunit provided useful functions in PayFabric for BC for third-party part
 - - -
 
 ## "Nodus PF Record Payments" (Codeunit 70117045)
-This codeunit provided useful functions to record processed PayFabric Capture/Sale Transactions in Cash Receipt Journals for BC partner developers
+This codeunit provide the function to record processed PayFabric Capture/Sale Transactions in Cash Receipt Journals for third-party developers
 
   * ### RecordPayments (Method)
     Use this method to record processed PayFabric Capture/Sale Transactions. 
@@ -190,5 +190,33 @@ This codeunit provided useful functions to record processed PayFabric Capture/Sa
             until PayFabricTransactions.Next() = 0;
     end;
     ```
+- - -
 
+## "Nodus PF Sales Quote" (Codeunit 70117047)
+This codeunit provide the function to retrieve processed transactions from Sales Quote in Sales Order/Invoice for third-party developers
+
+  * ### RetrieveSalesQuoteTrx (Method)
+    Use this method to retrieve processed transactions from Sales Quote in Sales Order/Invoice.
+
+    * #### Syntax
+      ```CAL
+      procedure RetrieveSalesQuoteTrx(SalesHeader: Record "Sales Header")
+      ```
+    * #### Parameters      
+      *SalesHeader(Record "Sales Header")*
+
+      BC Sales Order/Invoice source table object
+
+
+    * #### Example
+
+    ```CAL
+    procedure RetrieveSalesQuoteTrxTest(RecSalesHeader: Record "Sales Header")
+    var
+        SalesQuoteUnit: Codeunit "Nodus PF Sales Quote";
+    begin
+        SalesQuoteUnit.RetrieveSalesQuoteTrx(RecSalesHeader);
+    end;
+    ```
+    
 - - -
