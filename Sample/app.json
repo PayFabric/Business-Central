@@ -1,0 +1,39 @@
+{
+  "id": "1d4648ae-e9a4-438b-95cc-f84662f465fa",
+  "name": "Sample",
+  "publisher": "Default publisher",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "96a49c0c-8183-4248-9630-636462acfa39",
+      "name": "PayFabric · Secure Credit Card Processing",
+      "publisher": "Nodus Technologies, Inc.",
+      "version": "25.1.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "25.0.0.0",
+  "application": "25.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "14.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
