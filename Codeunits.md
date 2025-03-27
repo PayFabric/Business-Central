@@ -220,3 +220,37 @@ This codeunit provide the function to retrieve processed transactions from Sales
     ```
     
 - - -
+
+## "Nodus PF Outgoing Records Mgr." (Codeunit 70117048)
+Help third-party partners develop using Nodus Codeunit to add a queue on the PayFabric Outgoing Records.
+
+  * ### AddNewPFOutgoingQueue (Method)
+    Use this method to add a new PF Outgoing record for a customer ledger entry record.
+
+    * #### Syntax
+      ```CAL
+      procedure AddNewPFOutgoingQueue(CustLedgerEntryRec: Record "Cust. Ledger Entry")
+      ```
+    * #### Parameters      
+      *CustLedgerEntryRec: Record "Cust. Ledger Entry"*
+
+      BC Customer Ledger Entry source table object
+
+
+    * #### Example
+
+    ```CAL
+    procedure AddOneInvoiceToPFOutgoing()
+    var
+        CustLedgerEntryRec: Record "Cust. Ledger Entry";
+        EntryNo: Integer;
+        NodPFOutgoing: Codeunit "Nodus PF Outgoing Records Mgr.";
+    begin
+        EntryNo := 4172;
+        Clear(CustLedgerEntryRec);
+        if CustLedgerEntryRec.Get(EntryNo) then
+            NodPFOutgoing.AddNewPFOutgoingQueue(CustLedgerEntryRec);
+    end;
+    ```
+
+- - -
