@@ -10,7 +10,7 @@ This codeunit provide the function to process PayFabric Transaction in Sales Ord
     Use this method to process and save differenct types of transaction. 
 
     * #### Syntax
-      ```
+      ```al
       procedure ProcessTransaction(var SalesHeader: Record "Sales Header"; var PayFabricTransaction: Record nodPFTransactions) Success: Boolean
       ```
     * #### Parameters      
@@ -52,7 +52,7 @@ This codeunit provide the function to Send a PayLink in Sales Order/Invoice for 
     Use this method to send a PayLink to an email or phone number and save it.
 
     * #### Syntax
-    ```
+    ```al
     procedure SendPayLink(var SalesHeader: Record "Sales Header"; var PayFabricTransaction: Record nodPFTransactions) Success: Boolean
     ```
     * #### Parameters      
@@ -93,7 +93,7 @@ This codeunit provide the function to integrate PayFabric Transactions and PayLi
     Use this method to call BC PayFabric POST API to integrate PayFabric Transactions and PayLink into BC.
 
       * #### Syntax
-      ```
+      ```al
       procedure PayFabricTransactionIntegration(PayFabricTransactionKey: Text; DocumentType: Enum "Nodus PF Trx Document Type"; DocumentID: Text; Service: Enum "Nodus Service"; var PayFabricTransaction: Record nodPFTransactions)
       ```
 
@@ -127,7 +127,7 @@ This codeunit provide the function to populate default PayFabric fields in Busin
     This method populate all default PF fields such as default wallet, default email addresses, default invoice type and so on for existing Sales Order/Invoice and save it. If you want to check all of these fields, you can find it under PayFabric section of Sales Order/Invoice page.
 
     * #### Syntax
-      ```
+      ```al
       procedure PopulateDefaultPayFabricFields(var SalesHeader: Record "Sales Header")
       ```
 
@@ -154,7 +154,7 @@ This codeunit provide the function to record processed PayFabric Capture/Sale Tr
     Use this method to record processed PayFabric Capture/Sale Transactions. 
 
     * #### Syntax
-      ```CAL
+      ```al
       procedure RecordPayments(PayFabricTransactionKey: Text; SalesHeader: Record "Sales Header")
       ```
     * #### Parameters      
@@ -169,7 +169,7 @@ This codeunit provide the function to record processed PayFabric Capture/Sale Tr
 
     * #### Example
 
-    ```CAL
+    ```al
     procedure ProcessMultipleRecordPayments(RecSalesHeader: Record "Sales Header")
     var
         PayFabricTransactions: Record nodPFTransactions;
@@ -199,7 +199,7 @@ This codeunit provide the function to retrieve processed transactions from Sales
     Use this method to retrieve processed transactions from Sales Quote in Sales Order/Invoice.
 
     * #### Syntax
-      ```CAL
+      ```al
       procedure RetrieveSalesQuoteTrx(SalesHeader: Record "Sales Header")
       ```
     * #### Parameters      
@@ -210,7 +210,7 @@ This codeunit provide the function to retrieve processed transactions from Sales
 
     * #### Example
 
-    ```CAL
+    ```al
     procedure RetrieveSalesQuoteTrxTest(RecSalesHeader: Record "Sales Header")
     var
         SalesQuoteUnit: Codeunit "Nodus PF Sales Quote";
@@ -228,7 +228,7 @@ Help third-party partners develop using Nodus Codeunit to add a queue on the Pay
     Use this method to add a new PF Outgoing record for a customer ledger entry record.
 
     * #### Syntax
-      ```CAL
+      ```al
       procedure AddNewPFOutgoingQueue(CustLedgerEntryRec: Record "Cust. Ledger Entry")
       ```
     * #### Parameters      
@@ -239,7 +239,7 @@ Help third-party partners develop using Nodus Codeunit to add a queue on the Pay
 
     * #### Example
 
-    ```CAL
+    ```al
     procedure AddOneInvoiceToPFOutgoing()
     var
         CustLedgerEntryRec: Record "Cust. Ledger Entry";
@@ -254,3 +254,4 @@ Help third-party partners develop using Nodus Codeunit to add a queue on the Pay
     ```
 
 - - -
+
