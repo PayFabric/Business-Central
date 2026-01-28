@@ -253,5 +253,192 @@ Help third-party partners develop using Nodus Codeunit to add a queue on the Pay
     end;
     ```
 
+
+## "Nodus PF Payment Request." (Codeunit 70117054)
+Third-party partner developers can use this Codeunit to generate payment requests for posted Sales invoice.
+
+  * ### SendSinglePaymentRequestWithEmailSendType (Method)
+    Use this method to send a payment request containing only one invoice.
+
+    * #### Syntax
+      ```al
+      procedure SendSinglePaymentRequestWithEmailSendType(var SalesInvHeader: Record "Sales Invoice Header"; TemplateName: Code[200]; Email: Text[250]; AdditionalEmails: Text[2048]; var pErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object contains only one invoice record.
+
+      *TemplateName:  Code[200]*
+
+      The name of payment request template. If empty, use default template
+
+      *Email: Text[250]*
+
+      The email address
+
+      *AdditionalEmails: Text[2048]*
+
+      The additional email addresses
+      
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+
+    * #### Example
+
+    ```al
+    procedure SendSinglePaymentRequestWithEmail()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        TemplateName: Code[200];
+        Email: Text[250];
+        AdditionalEmails: Text[2048];
+        pErrorMsg: Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+        Result: Boolean;
+    begin
+        clear(pErrorMsg);
+        TemplateName := 'SinglePaymentRequestTemplate';
+        Email:='TestAccount1@google.com';
+        AdditionalEmails:='TestAccount2@google.com';
+        Result:=NodusPFPaymentRequest.SendSinglePaymentRequestWithEmailSendType(SalesInvHeader,TemplateName,Email,AdditionalEmails,pErrorMsg);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+
+* ### SendMultiplePaymentRequestWithEmailSendType (Method)
+    Use this method to send a payment request containing multiple invoices.
+
+    * #### Syntax
+      ```al
+      procedure SendMultiplePaymentRequestWithEmailSendType(var SalesInvHeader: Record "Sales Invoice Header"; TemplateName: Code[200]; Email: Text[250]; AdditionalEmails: Text[2048]; var pErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object contains more than one invoice record.
+
+      *TemplateName:  Code[200]*
+
+      The name of payment request template. If empty, use default template
+
+      *Email: Text[250]*
+
+      The email address
+
+      *AdditionalEmails: Text[2048]*
+
+      The additional email addresses
+
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+
+    * #### Example
+
+    ```al
+    procedure SendMultiplePaymentRequestWithEmail()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        TemplateName: Code[200];
+        Email:Text[250];
+        AdditionalEmails:Text[2048];
+        pErrorMsg:Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+        Result: Boolean;
+    begin
+        clear(pErrorMsg);
+        TemplateName := 'MultiplePaymentRequestTemplate';
+        Email:='TestAccount1@google.com';
+        AdditionalEmails:='TestAccount2@google.com';
+        Result:=NodusPFPaymentRequest.SendMultiplePaymentRequestWithEmailSendType(SalesInvHeader,TemplateName,Email,AdditionalEmails,pErrorMsg);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+
+    * ### BatchSendSinglePaymentRequestWithEmailSendType (Method)
+    Use this method to send a payment request containing multiple different customers and multiple currencies.
+
+    * #### Syntax
+      ```al
+      procedure BatchSendSinglePaymentRequestWithEmailSendType(var SalesInvHeader: Record "Sales Invoice Header"; TemplateName: Code[200]; var pErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object contains more than one invoice record.
+
+      *TemplateName:  Code[200]*
+
+      The name of payment request template. If empty, use default template
+
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+
+    * #### Example
+
+    ```al
+    procedure BatchSendSinglePaymentRequestWithEmail()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        TemplateName: Code[200];
+        pErrorMsg: Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+        Result: Boolean;
+    begin
+        clear(pErrorMsg);
+        TemplateName := 'SinglePaymentRequestTemplate';
+        Result:=NodusPFPaymentRequest.BatchSendSinglePaymentRequestWithEmailSendType(SalesInvHeader,TemplateName,pErrorMsg);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+
+    * ### SendPaymentRequestWithLinkSendType (Method)
+    Use this method to create payment request links that include one or more invoices.
+
+    * #### Syntax
+      ```al
+      procedure SendPaymentRequestWithLinkSendType(var SalesInvHeader: Record "Sales Invoice Header"; var pErrorMsg: Text): Text
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object contains more than one invoice record.
+
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+
+    * #### Example
+
+    ```al
+    procedure SendPaymentRequestWithLink()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        PaymentLink: Text;
+        pErrorMsg: Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+    begin
+        clear(pErrorMsg);
+        clear(PaymentLink);
+        PaymentLink:=NodusPFPaymentRequest.SendPaymentRequestWithLinkSendType(SalesInvHeader,pErrorMsg);
+        if PaymentLink='' then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
 - - -
+
 
