@@ -268,22 +268,26 @@ Third-party partner developers can use this Codeunit to generate payment request
       *SalesInvHeader: Record "Sales Invoice Header"*
 
       The posted sales invoice table object contains only one invoice record.
+      The number of invoices in the SalesInvHeader is equal to 1.
 
       *TemplateName:  Code[200]*
 
-      The name of payment request template. If empty, use default template
+      The name of payment request template. If empty, use "Single" template type
 
       *Email: Text[250]*
 
-      The email address
+      The email address. If empty, use posted sales invoice's email address
 
       *AdditionalEmails: Text[2048]*
 
-      The additional email addresses
+      The additional email addresses. If empty, use posted sales invoice's additional emails
       
       *pErrorMsg:  Text*
 
       A field used to store error messages.
+
+    * #### Return Value    
+      Success: `True`, Failed: `False`
 
     * #### Example
 
@@ -320,23 +324,25 @@ Third-party partner developers can use this Codeunit to generate payment request
     * #### Parameters      
       *SalesInvHeader: Record "Sales Invoice Header"*
 
-      The posted sales invoice table object contains more than one invoice record.
+      The posted sales invoice table object contains more than one invoice record with same customer and same currency.
 
       *TemplateName:  Code[200]*
 
-      The name of payment request template. If empty, use default template
+      The name of payment request template. If empty, use "Multiple" template type
 
       *Email: Text[250]*
 
-      The email address
+      The email address. If empty, use posted sales invoice's email address
 
       *AdditionalEmails: Text[2048]*
 
-      The additional email addresses
+      The additional email addresses. If empty, use posted sales invoice's additional emails
 
       *pErrorMsg:  Text*
 
       A field used to store error messages.
+    * #### Return Value    
+      Success: `True`, Failed: `False`
 
     * #### Example
 
@@ -374,14 +380,17 @@ Third-party partner developers can use this Codeunit to generate payment request
       *SalesInvHeader: Record "Sales Invoice Header"*
 
       The posted sales invoice table object contains more than one invoice record.
+      The invoices in the SalesInvHeader must have the not same Customer or not same Currency.
 
       *TemplateName:  Code[200]*
 
-      The name of payment request template. If empty, use default template
+      The name of payment request template. If empty, use "Single" template type
 
       *pErrorMsg:  Text*
 
       A field used to store error messages.
+    * #### Return Value    
+      Success: `True`, Failed: `False`
 
     * #### Example
 
@@ -414,11 +423,13 @@ Third-party partner developers can use this Codeunit to generate payment request
     * #### Parameters      
       *SalesInvHeader: Record "Sales Invoice Header"*
 
-      The posted sales invoice table object contains more than one invoice record.
-
+      The posted sales invoice table object with same Customer and same Currency.
+      
       *pErrorMsg:  Text*
 
       A field used to store error messages.
+    * #### Return Value    
+      PaymentRequestLink: Text
 
     * #### Example
 
@@ -440,5 +451,4 @@ Third-party partner developers can use this Codeunit to generate payment request
     end;
     ```
 - - -
-
 
