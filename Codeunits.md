@@ -272,7 +272,7 @@ Third-party partner developers can use this Codeunit to generate payment request
 
       *TemplateName:  Code[200]*
 
-      The name of payment request template. If empty, use "Single" template type
+      The name of payment request template. If empty, use default "Single" template type
 
       *Email: Text[250]*
 
@@ -328,7 +328,7 @@ Third-party partner developers can use this Codeunit to generate payment request
 
       *TemplateName:  Code[200]*
 
-      The name of payment request template. If empty, use "Multiple" template type
+      The name of payment request template. If empty, use default "Multiple" template type
 
       *Email: Text[250]*
 
@@ -384,7 +384,7 @@ Third-party partner developers can use this Codeunit to generate payment request
 
       *TemplateName:  Code[200]*
 
-      The name of payment request template. If empty, use "Single" template type
+      The name of payment request template. If empty, use default "Single" template type
 
       *pErrorMsg:  Text*
 
