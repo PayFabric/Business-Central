@@ -480,10 +480,10 @@ Third-party partner developers to automatically initialize Authorization transac
 
       A field used to store error messages.
 
-* #### Return Value    
+    * #### Return Value    
       Success: `True`, Failed: `False`
 
-* #### Example
+    * #### Example
 
     ```al
     procedure AuthorizationBeforeRelease()
@@ -506,12 +506,12 @@ Third-party partner developers to automatically initialize Authorization transac
       ```al
       procedure CaptureOnPost(var SalesHeader: Record "Sales Header"; IsAutomatic: Boolean; var ErrorMsg: Text): Boolean
       ```
-* #### Parameters      
+    * #### Parameters      
       *SalesHeader: Record "Sales Header"*
 
      The BC Sales Order/Invoice source table object
 
-      * ##### `SalesHeader` Record Attribute
+    * ##### `SalesHeader` Record Attribute
 
         Attribute | Data Type | Required | Definition
         ---- | ---- | ---- | ----
@@ -526,10 +526,10 @@ Third-party partner developers to automatically initialize Authorization transac
 
       A field used to store error messages.
 
-* #### Return Value    
+    * #### Return Value    
       Success: `True`, Failed: `False`
 
-* #### Example
+    * #### Example
 
     ```al
     procedure CaptureOnPost()
