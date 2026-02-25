@@ -450,5 +450,100 @@ Third-party partner developers can use this Codeunit to generate payment request
 
     end;
     ```
+## "Nod Pmt. Processing Automation" (Codeunit 70117055)
+Third-party partner developers to automatically initialize Authorization transactions upon document release and Capture transactions upon posting for documents with pending authorizations via codeunit.
+
+  * ### AuthorizationBeforeRelease (Method)
+    Use this method to send a payment request containing only one invoice.
+
+    * #### Syntax
+      ```al
+      procedure AuthorizationBeforeRelease(var SalesHeader: Record "Sales Header"; IsAutomatic: Boolean; var ErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesHeader: Record "Sales Header"*
+
+     The BC Sales Order/Invoice source table object
+
+      * ##### `SalesHeader` Record Attribute
+
+        Attribute | Data Type | Required | Definition
+        ---- | ---- | ---- | ----
+        No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
+        Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
+
+    *IsAutomatic:  Boolean*
+
+      if true will use Automatic; if not will use configured setting on PF setup page.
+
+    *ErrorMsg:  Text*
+
+      A field used to store error messages.
+
+* #### Return Value    
+      Success: `True`, Failed: `False`
+
+* #### Example
+
+    ```al
+    procedure AuthorizationBeforeRelease()
+    var
+        SalesHeader: Record "Sales Header";
+        NodusProcessingAutomation: Codeunit "Nod Pmt. Processing Automation";
+        Result: Boolean;
+    begin
+        Result:=NodusProcessingAutomation.AuthorizationBeforeRelease(SalesHeader,true);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+* ### CaptureOnPost (Method)
+    Use this method to send a payment request containing only one invoice.
+
+    * #### Syntax
+      ```al
+      procedure CaptureOnPost(var SalesHeader: Record "Sales Header"; IsAutomatic: Boolean; var ErrorMsg: Text): Boolean
+      ```
+* #### Parameters      
+      *SalesHeader: Record "Sales Header"*
+
+     The BC Sales Order/Invoice source table object
+
+      * ##### `SalesHeader` Record Attribute
+
+        Attribute | Data Type | Required | Definition
+        ---- | ---- | ---- | ----
+        No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
+        Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
+
+    *IsAutomatic:  Boolean*
+
+      if true will use Automatic; if not will use configured setting on PF setup page.
+
+    *ErrorMsg:  Text*
+
+      A field used to store error messages.
+
+* #### Return Value    
+      Success: `True`, Failed: `False`
+
+* #### Example
+
+    ```al
+    procedure CaptureOnPost()
+    var
+        SalesHeader: Record "Sales Header";
+        NodusProcessingAutomation: Codeunit "Nod Pmt. Processing Automation";
+        Result: Boolean;
+    begin
+        Result:=NodusProcessingAutomation.CaptureOnPost(SalesHeader,true);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
 - - -
 
