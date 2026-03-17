@@ -369,7 +369,7 @@ Third-party partner developers can use this Codeunit to generate payment request
     end;
     ```
 
-    * ### BatchSendSinglePaymentRequestWithEmailSendType (Method)
+* ### BatchSendSinglePaymentRequestWithEmailSendType (Method)
     Use this method to send a payment request containing multiple different customers and multiple currencies.
 
     * #### Syntax
@@ -413,7 +413,7 @@ Third-party partner developers can use this Codeunit to generate payment request
     end;
     ```
 
-    * ### SendPaymentRequestWithLinkSendType (Method)
+* ### SendPaymentRequestWithLinkSendType (Method)
     Use this method to create payment request links that include one or more invoices.
 
     * #### Syntax
@@ -463,22 +463,22 @@ Third-party partner developers to automatically initialize Authorization transac
     * #### Parameters      
       *SalesHeader: Record "Sales Header"*
 
-     The BC Sales Order/Invoice source table object
+        The BC Sales Order/Invoice source table object
 
-      * ##### `SalesHeader` Record Attribute
+        * ##### `SalesHeader` Record Attribute
 
-        Attribute | Data Type | Required | Definition
-        ---- | ---- | ---- | ----
-        No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
-        Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
+          Attribute | Data Type | Required | Definition
+          ---- | ---- | ---- | ----
+          No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
+          Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
 
-    *IsAutomatic:  Boolean*
+      *IsAutomatic:  Boolean*
 
-      if true will use Automatic; if not will use configured setting on PF setup page.
+        if true will use Automatic; if not will use configured setting on PF setup page.
 
-    *ErrorMsg:  Text*
+      *ErrorMsg:  Text*
 
-      A field used to store error messages.
+        A field used to store error messages.
 
     * #### Return Value    
       Success: `True`, Failed: `False`
@@ -509,22 +509,22 @@ Third-party partner developers to automatically initialize Authorization transac
     * #### Parameters      
       *SalesHeader: Record "Sales Header"*
 
-     The BC Sales Order/Invoice source table object
+        The BC Sales Order/Invoice source table object
 
-    * ##### `SalesHeader` Record Attribute
+        * ##### `SalesHeader` Record Attribute
 
-        Attribute | Data Type | Required | Definition
-        ---- | ---- | ---- | ----
-        No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
-        Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
+          Attribute | Data Type | Required | Definition
+          ---- | ---- | ---- | ----
+          No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
+          Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
 
-    *IsAutomatic:  Boolean*
+      *IsAutomatic:  Boolean*
 
-      if true will use Automatic; if not will use configured setting on PF setup page.
+        if true will use Automatic; if not will use configured setting on PF setup page.
 
-    *ErrorMsg:  Text*
+      *ErrorMsg:  Text*
 
-      A field used to store error messages.
+        A field used to store error messages.
 
     * #### Return Value    
       Success: `True`, Failed: `False`
