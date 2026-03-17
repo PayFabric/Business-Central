@@ -253,5 +253,297 @@ Help third-party partners develop using Nodus Codeunit to add a queue on the Pay
     end;
     ```
 
+
+## "Nodus PF Payment Request." (Codeunit 70117054)
+Third-party partner developers can use this Codeunit to generate payment requests for posted Sales invoice.
+
+  * ### SendSinglePaymentRequestWithEmailSendType (Method)
+    Use this method to send a payment request containing only one invoice.
+
+    * #### Syntax
+      ```al
+      procedure SendSinglePaymentRequestWithEmailSendType(var SalesInvHeader: Record "Sales Invoice Header"; TemplateName: Code[200]; Email: Text[250]; AdditionalEmails: Text[2048]; var pErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object contains only one invoice record.
+      The number of invoices in the SalesInvHeader is equal to 1.
+
+      *TemplateName:  Code[200]*
+
+      The name of payment request template. If empty, use default "Single" template type
+
+      *Email: Text[250]*
+
+      The email address. If empty, use posted sales invoice's email address
+
+      *AdditionalEmails: Text[2048]*
+
+      The additional email addresses. If empty, use posted sales invoice's additional emails
+      
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+
+    * #### Return Value    
+      Success: `True`, Failed: `False`
+
+    * #### Example
+
+    ```al
+    procedure SendSinglePaymentRequestWithEmail()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        TemplateName: Code[200];
+        Email: Text[250];
+        AdditionalEmails: Text[2048];
+        pErrorMsg: Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+        Result: Boolean;
+    begin
+        clear(pErrorMsg);
+        TemplateName := 'SinglePaymentRequestTemplate';
+        Email:='TestAccount1@google.com';
+        AdditionalEmails:='TestAccount2@google.com';
+        Result:=NodusPFPaymentRequest.SendSinglePaymentRequestWithEmailSendType(SalesInvHeader,TemplateName,Email,AdditionalEmails,pErrorMsg);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+
+* ### SendMultiplePaymentRequestWithEmailSendType (Method)
+    Use this method to send a payment request containing multiple invoices.
+
+    * #### Syntax
+      ```al
+      procedure SendMultiplePaymentRequestWithEmailSendType(var SalesInvHeader: Record "Sales Invoice Header"; TemplateName: Code[200]; Email: Text[250]; AdditionalEmails: Text[2048]; var pErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object contains more than one invoice record with same customer and same currency.
+
+      *TemplateName:  Code[200]*
+
+      The name of payment request template. If empty, use default "Multiple" template type
+
+      *Email: Text[250]*
+
+      The email address. If empty, use posted sales invoice's email address
+
+      *AdditionalEmails: Text[2048]*
+
+      The additional email addresses. If empty, use posted sales invoice's additional emails
+
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+    * #### Return Value    
+      Success: `True`, Failed: `False`
+
+    * #### Example
+
+    ```al
+    procedure SendMultiplePaymentRequestWithEmail()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        TemplateName: Code[200];
+        Email:Text[250];
+        AdditionalEmails:Text[2048];
+        pErrorMsg:Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+        Result: Boolean;
+    begin
+        clear(pErrorMsg);
+        TemplateName := 'MultiplePaymentRequestTemplate';
+        Email:='TestAccount1@google.com';
+        AdditionalEmails:='TestAccount2@google.com';
+        Result:=NodusPFPaymentRequest.SendMultiplePaymentRequestWithEmailSendType(SalesInvHeader,TemplateName,Email,AdditionalEmails,pErrorMsg);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+
+* ### BatchSendSinglePaymentRequestWithEmailSendType (Method)
+    Use this method to send a payment request containing multiple different customers and multiple currencies.
+
+    * #### Syntax
+      ```al
+      procedure BatchSendSinglePaymentRequestWithEmailSendType(var SalesInvHeader: Record "Sales Invoice Header"; TemplateName: Code[200]; var pErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object contains more than one invoice record.
+      The invoices in the SalesInvHeader must have the not same Customer or not same Currency.
+
+      *TemplateName:  Code[200]*
+
+      The name of payment request template. If empty, use default "Single" template type
+
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+    * #### Return Value    
+      Success: `True`, Failed: `False`
+
+    * #### Example
+
+    ```al
+    procedure BatchSendSinglePaymentRequestWithEmail()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        TemplateName: Code[200];
+        pErrorMsg: Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+        Result: Boolean;
+    begin
+        clear(pErrorMsg);
+        TemplateName := 'SinglePaymentRequestTemplate';
+        Result:=NodusPFPaymentRequest.BatchSendSinglePaymentRequestWithEmailSendType(SalesInvHeader,TemplateName,pErrorMsg);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+
+* ### SendPaymentRequestWithLinkSendType (Method)
+    Use this method to create payment request links that include one or more invoices.
+
+    * #### Syntax
+      ```al
+      procedure SendPaymentRequestWithLinkSendType(var SalesInvHeader: Record "Sales Invoice Header"; var pErrorMsg: Text): Text
+      ```
+    * #### Parameters      
+      *SalesInvHeader: Record "Sales Invoice Header"*
+
+      The posted sales invoice table object with same Customer and same Currency.
+      
+      *pErrorMsg:  Text*
+
+      A field used to store error messages.
+    * #### Return Value    
+      PaymentRequestLink: Text
+
+    * #### Example
+
+    ```al
+    procedure SendPaymentRequestWithLink()
+    var
+        SalesInvHeader: Record "Sales Invoice Header";
+        PaymentLink: Text;
+        pErrorMsg: Text;
+        NodusPFPaymentRequest: Codeunit "Nodus PF Payment Request";
+    begin
+        clear(pErrorMsg);
+        clear(PaymentLink);
+        PaymentLink:=NodusPFPaymentRequest.SendPaymentRequestWithLinkSendType(SalesInvHeader,pErrorMsg);
+        if PaymentLink='' then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+## "Nod Pmt. Processing Automation" (Codeunit 70117055)
+Third-party partner developers to automatically initialize Authorization transactions upon document release and Capture transactions upon posting for documents with pending authorizations via codeunit.
+
+  * ### AuthorizationBeforeRelease (Method)
+    Use this method to send a payment request containing only one invoice.
+
+    * #### Syntax
+      ```al
+      procedure AuthorizationBeforeRelease(var SalesHeader: Record "Sales Header"; IsAutomatic: Boolean; var ErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesHeader: Record "Sales Header"*
+
+        The BC Sales Order/Invoice source table object
+
+        * ##### `SalesHeader` Record Attribute
+
+          Attribute | Data Type | Required | Definition
+          ---- | ---- | ---- | ----
+          No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
+          Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
+
+      *IsAutomatic:  Boolean*
+
+        if true will use Automatic; if not will use configured setting on PF setup page.
+
+      *ErrorMsg:  Text*
+
+        A field used to store error messages.
+
+    * #### Return Value    
+      Success: `True`, Failed: `False`
+
+    * #### Example
+
+    ```al
+    procedure AuthorizationBeforeRelease()
+    var
+        SalesHeader: Record "Sales Header";
+        NodusProcessingAutomation: Codeunit "Nod Pmt. Processing Automation";
+        Result: Boolean;
+    begin
+        Result:=NodusProcessingAutomation.AuthorizationBeforeRelease(SalesHeader,true);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
+* ### CaptureOnPost (Method)
+    Use this method to send a payment request containing only one invoice.
+
+    * #### Syntax
+      ```al
+      procedure CaptureOnPost(var SalesHeader: Record "Sales Header"; IsAutomatic: Boolean; var ErrorMsg: Text): Boolean
+      ```
+    * #### Parameters      
+      *SalesHeader: Record "Sales Header"*
+
+        The BC Sales Order/Invoice source table object
+
+        * ##### `SalesHeader` Record Attribute
+
+          Attribute | Data Type | Required | Definition
+          ---- | ---- | ---- | ----
+          No. | Code[20] | Y | The document number in Sales Header, if it is blank then will throw error.
+          Document Type | Enum "Sales Document Type" | Y | Only accept `Order` and `Invoice` Type, if not then will throw error.
+
+      *IsAutomatic:  Boolean*
+
+        if true will use Automatic; if not will use configured setting on PF setup page.
+
+      *ErrorMsg:  Text*
+
+        A field used to store error messages.
+
+    * #### Return Value    
+      Success: `True`, Failed: `False`
+
+    * #### Example
+
+    ```al
+    procedure CaptureOnPost()
+    var
+        SalesHeader: Record "Sales Header";
+        NodusProcessingAutomation: Codeunit "Nod Pmt. Processing Automation";
+        Result: Boolean;
+    begin
+        Result:=NodusProcessingAutomation.CaptureOnPost(SalesHeader,true);
+        if not Result then begin
+            Error('Test failed, unexpected error message: ' + pErrorMsg);
+        end;
+
+    end;
+    ```
 - - -
 
