@@ -254,7 +254,7 @@ Help third-party partners develop using Nodus Codeunit to add a queue on the Pay
     ```
 
 
-## "Nodus PF Payment Request." (Codeunit 70117054)
+## "Nodus PF Payment Request" (Codeunit 70117054)
 Third-party partner developers can use this Codeunit to generate payment requests for posted Sales invoice.
 
   * ### SendSinglePaymentRequestWithEmailSendType (Method)
