@@ -454,7 +454,8 @@ Third-party partner developers can use this Codeunit to generate payment request
 Third-party partner developers to automatically initialize Authorization transactions upon document release and Capture transactions upon posting for documents with pending authorizations via codeunit.
 
   * ### AuthorizationBeforeRelease (Method)
-    Use this method to send a payment request containing only one invoice.
+    Use this method to automatically initialize an Authorization transaction when releasing a document.
+
 
     * #### Syntax
       ```al
@@ -500,7 +501,7 @@ Third-party partner developers to automatically initialize Authorization transac
     end;
     ```
 * ### CaptureOnPost (Method)
-    Use this method to send a payment request containing only one invoice.
+    Use this method to automatically initialize a Capture transaction when posting a document with a pending authorization.
 
     * #### Syntax
       ```al
